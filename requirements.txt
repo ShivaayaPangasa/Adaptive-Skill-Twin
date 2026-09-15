@@ -6,3 +6,4 @@ matplotlib
 ezc3d
 pandas
 tqdm
+requests
