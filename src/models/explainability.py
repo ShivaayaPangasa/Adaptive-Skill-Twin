@@ -55,8 +55,12 @@ if __name__ == "__main__":
 
     A = build_adjacency()
     model = STGCN(A, in_channels=3, num_classes=len(labels)).to(DEVICE)
-    model.load_state_dict(torch.load("outputs/stgcn_baseline.pt", map_location=DEVICE))
-
+    
+    model.load_state_dict(
+    torch.load(
+        "outputs/stgcn_best.pt",
+        map_location=DEVICE))
+    
     baseline_acc = eval_stgcn(model, X, y)
     print(f"Baseline (no occlusion) accuracy: {baseline_acc:.3f}\n")
 

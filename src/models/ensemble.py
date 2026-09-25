@@ -43,13 +43,13 @@ if __name__ == "__main__":
 
     # LSTM
     lstm = LSTMClassifier(input_size=117, num_classes=len(labels)).to(DEVICE)
-    lstm.load_state_dict(torch.load("outputs/lstm_baseline.pt", map_location=DEVICE, weights_only=True))
+    lstm.load_state_dict(torch.load("outputs/lstm_best.pt", map_location=DEVICE, weights_only=True))
     lstm.eval()
 
     # ST-GCN
     A = build_adjacency()
     stgcn = STGCN(A, in_channels=3, num_classes=len(labels)).to(DEVICE)
-    stgcn.load_state_dict(torch.load("outputs/stgcn_baseline.pt", map_location=DEVICE, weights_only=True))
+    stgcn.load_state_dict(torch.load("outputs/stgcn_best.pt", map_location=DEVICE, weights_only=True))
     stgcn.eval()
 
     # Random Forest (retrained here on train split for consistency)

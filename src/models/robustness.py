@@ -60,11 +60,21 @@ if __name__ == "__main__":
     print(f"Test set: {len(X)} samples, classes: {labels}")
 
     lstm = LSTMClassifier(input_size=117, num_classes=len(labels)).to(DEVICE)
-    lstm.load_state_dict(torch.load("outputs/lstm_baseline.pt", map_location=DEVICE))
+    
+    lstm.load_state_dict(
+    torch.load(
+        "outputs/lstm_best.pt",
+        map_location=DEVICE
+    )
+)
 
     A = build_adjacency()
     stgcn = STGCN(A, in_channels=3, num_classes=len(labels)).to(DEVICE)
-    stgcn.load_state_dict(torch.load("outputs/stgcn_baseline.pt", map_location=DEVICE))
+    
+    stgcn.load_state_dict(
+    torch.load(
+        "outputs/stgcn_best.pt",
+        map_location=DEVICE))
 
     rng = np.random.default_rng(SEED)
     print(f"\n{'Occlusion':>10} | {'LSTM acc':>10} | {'ST-GCN acc':>10}")
